@@ -1,7 +1,7 @@
-import { Button } from "@chakra-ui/button";
 import { Container } from "@chakra-ui/layout";
 import type { NextPage } from "next";
 import Head from "next/head";
+
 import { LoginWithAnnict } from "../components/LoginWithAnnict";
 
 const Home: NextPage = () => {
