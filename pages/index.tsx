@@ -1,8 +1,8 @@
-import { Container } from "@chakra-ui/layout";
-import type { NextPage } from "next";
-import Head from "next/head";
+import { Container } from "@chakra-ui/layout"
+import type { NextPage } from "next"
+import Head from "next/head"
 
-import { LoginWithAnnict } from "../components/LoginWithAnnict";
+import { LoginWithAnnict } from "../components/LoginWithAnnict"
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <LoginWithAnnict />
       </Container>
     </Container>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

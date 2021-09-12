@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Stack } from "@chakra-ui/react";
+import { Button, Flex, Heading, Stack } from "@chakra-ui/react"
 
 export const LoginWithAnnict = (): JSX.Element => {
   return (
@@ -12,5 +12,5 @@ export const LoginWithAnnict = (): JSX.Element => {
         </Stack>
       </Stack>
     </Flex>
-  );
-};
+  )
+}
