@@ -1,6 +1,7 @@
 import { Button, Flex, Heading, Stack } from "@chakra-ui/react"
+import { signIn } from "next-auth/client"
 
-export const LoginWithAnnict = (): JSX.Element => {
+export const LoginWithAnnict: React.FC = (): JSX.Element => {
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"}>
       <Stack spacing={4} w={"full"} maxW={"md"} p={6} my={12}>
@@ -8,7 +9,9 @@ export const LoginWithAnnict = (): JSX.Element => {
           Panino
         </Heading>
         <Stack spacing={6}>
-          <Button colorScheme="pink">Annict でログイン</Button>
+          <Button colorScheme="pink" onClick={() => signIn()}>
+            Annict でログイン
+          </Button>
         </Stack>
       </Stack>
     </Flex>

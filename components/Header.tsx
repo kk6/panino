@@ -8,15 +8,11 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react"
+import { DefaultSession } from "next-auth"
+import { signOut } from "next-auth/client"
 import React from "react"
 
-// Note: This code could be better,
-// so I'd recommend you to understand how I solved and you could write yours better :)
-// Good luck! 🍀
-
-// Update: Check these awesome headers from Choc UI 👇
-// https://choc-ui.tech/docs/elements/headers
-const Header: React.FC = (props) => {
+const Header: React.FC<DefaultSession> = ({ user }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleToggle = () => (isOpen ? onClose() : onOpen())
 
@@ -29,11 +25,10 @@ const Header: React.FC = (props) => {
       p={4}
       bg="pink.500"
       color="white"
-      {...props}
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={"tighter"}>
-          Panino
+          {user?.name}
         </Heading>
       </Flex>
 
@@ -61,7 +56,7 @@ const Header: React.FC = (props) => {
         display={{ base: isOpen ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Button variant="outline" colorScheme="white">
+        <Button variant="outline" colorScheme="white" onClick={() => signOut()}>
           ログアウト
         </Button>
       </Box>
