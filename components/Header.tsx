@@ -56,7 +56,15 @@ const Header: React.FC<DefaultSession> = ({ user }) => {
         display={{ base: isOpen ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Button variant="outline" colorScheme="white" onClick={() => signOut()}>
+        <Button
+          variant="outline"
+          colorScheme="white"
+          onClick={() =>
+            signOut({
+              callbackUrl: `${window.location.origin}`,
+            })
+          }
+        >
           ログアウト
         </Button>
       </Box>

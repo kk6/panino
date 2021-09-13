@@ -9,7 +9,14 @@ export const LoginWithAnnict: React.FC = (): JSX.Element => {
           Panino
         </Heading>
         <Stack spacing={6}>
-          <Button colorScheme="pink" onClick={() => signIn()}>
+          <Button
+            colorScheme="pink"
+            onClick={() =>
+              signIn("annict", {
+                callbackUrl: `${window.location.origin}/home`,
+              })
+            }
+          >
             Annict でログイン
           </Button>
         </Stack>
