@@ -4,3 +4,5 @@ node_modules
 dist
 # don't lint nyc coverage output
 coverage
+# 自動生成ファイルは無視
+src/generated

@@ -4,9 +4,10 @@ import { useSession } from "next-auth/client"
 
 import { AuthCheck } from "@/components/AuthCheck"
 import Header from "@/components/Header"
+import { WatchingAnimeContainer } from "@/components/WatchingAnime"
 
 const Home: NextPage = () => {
-  const [session, loading] = useSession()
+  const [session, _] = useSession()
   return (
     <AuthCheck>
       <Head>
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
       </Head>
 
       <Header user={session?.user} />
-      <h1>Hello {session?.user?.name}</h1>
+      <WatchingAnimeContainer />
     </AuthCheck>
   )
 }

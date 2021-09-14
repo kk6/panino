@@ -1,12 +1,10 @@
 import type { NextPage } from "next"
 import Head from "next/head"
-import { useSession } from "next-auth/client"
 
 import { AuthCheck } from "@/components/AuthCheck"
 import { LoginWithAnnict } from "@/components/LoginWithAnnict"
 
 const Index: NextPage = () => {
-  const [session, loading] = useSession()
   return (
     <AuthCheck>
       <Head>

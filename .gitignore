@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Annict の GraphQL スキーマは含めない
+annict-schema.graphql
