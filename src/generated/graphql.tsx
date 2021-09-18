@@ -1264,28 +1264,83 @@ export enum WorkOrderField {
   WatchersCount = 'WATCHERS_COUNT'
 }
 
+export type GetEpisodeListQueryVariables = Exact<{
+  annictId?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetEpisodeListQuery = { __typename?: 'Query', searchWorks?: Maybe<{ __typename?: 'WorkConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'WorkEdge', node?: Maybe<{ __typename?: 'Work', id: string, annictId: number, title: string, viewerStatusState?: Maybe<StatusState>, episodes?: Maybe<{ __typename?: 'EpisodeConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'EpisodeEdge', node?: Maybe<{ __typename?: 'Episode', id: string, number?: Maybe<number>, numberText?: Maybe<string>, title?: Maybe<string>, viewerDidTrack: boolean }> }>>> }> }> }>>> }> };
+
 export type WatchingAnimeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WatchingAnimeQuery = { __typename?: 'Query', viewer?: Maybe<{ __typename?: 'User', works?: Maybe<{ __typename?: 'WorkConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Work', id: string, title: string, episodesCount: number, image?: Maybe<{ __typename?: 'WorkImage', recommendedImageUrl?: Maybe<string> }>, episodes?: Maybe<{ __typename?: 'EpisodeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Episode', title?: Maybe<string> }>>> }> }>>> }> }> };
+export type WatchingAnimeQuery = { __typename?: 'Query', viewer?: Maybe<{ __typename?: 'User', works?: Maybe<{ __typename?: 'WorkConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Work', annictId: number, title: string, episodesCount: number, image?: Maybe<{ __typename?: 'WorkImage', recommendedImageUrl?: Maybe<string> }> }>>> }> }> };
 
 
+export const GetEpisodeListDocument = gql`
+    query getEpisodeList($annictId: [Int!]) {
+  searchWorks(annictIds: $annictId) {
+    edges {
+      node {
+        id
+        annictId
+        title
+        viewerStatusState
+        episodes(orderBy: {field: SORT_NUMBER, direction: ASC}) {
+          edges {
+            node {
+              id
+              number
+              numberText
+              title
+              viewerDidTrack
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetEpisodeListQuery__
+ *
+ * To run a query within a React component, call `useGetEpisodeListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEpisodeListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEpisodeListQuery({
+ *   variables: {
+ *      annictId: // value for 'annictId'
+ *   },
+ * });
+ */
+export function useGetEpisodeListQuery(baseOptions?: Apollo.QueryHookOptions<GetEpisodeListQuery, GetEpisodeListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetEpisodeListQuery, GetEpisodeListQueryVariables>(GetEpisodeListDocument, options);
+      }
+export function useGetEpisodeListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEpisodeListQuery, GetEpisodeListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetEpisodeListQuery, GetEpisodeListQueryVariables>(GetEpisodeListDocument, options);
+        }
+export type GetEpisodeListQueryHookResult = ReturnType<typeof useGetEpisodeListQuery>;
+export type GetEpisodeListLazyQueryHookResult = ReturnType<typeof useGetEpisodeListLazyQuery>;
+export type GetEpisodeListQueryResult = Apollo.QueryResult<GetEpisodeListQuery, GetEpisodeListQueryVariables>;
 export const WatchingAnimeDocument = gql`
     query WatchingAnime {
   viewer {
     works(state: WATCHING, orderBy: {field: SEASON, direction: DESC}) {
       nodes {
-        id
+        annictId
         title
         image {
           recommendedImageUrl
         }
         episodesCount
-        episodes {
-          nodes {
-            title
-          }
-        }
       }
     }
   }

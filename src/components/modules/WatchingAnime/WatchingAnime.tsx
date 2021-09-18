@@ -1,4 +1,5 @@
 import { Box, Heading, Text, VStack } from "@chakra-ui/react"
+import Link from "next/link"
 
 import { WatchingAnimeQuery } from "@/generated/graphql"
 
@@ -13,7 +14,8 @@ export const WatchingAnime: React.FC<Props> = ({ data }) => {
         !!data.viewer.works.nodes &&
         data.viewer.works.nodes.map((work) => (
           <WorkCard
-            key={work?.id}
+            key={work?.annictId}
+            annictId={work?.annictId}
             title={work?.title}
             episodesCount={work?.episodesCount}
           />
@@ -23,13 +25,21 @@ export const WatchingAnime: React.FC<Props> = ({ data }) => {
 }
 
 interface WorkCardProps {
+  annictId: number | undefined
   title: string | undefined
   episodesCount: number | undefined
 }
-const WorkCard: React.FC<WorkCardProps> = ({ title, episodesCount }) => {
+const WorkCard: React.FC<WorkCardProps> = ({
+  annictId,
+  title,
+  episodesCount,
+}) => {
+  const href = `works/${annictId}/episodes`
   return (
     <Box p={5} shadow="md">
-      <Heading fontSize="md">{title}</Heading>
+      <Heading fontSize="md">
+        <Link href={href}>{title}</Link>
+      </Heading>
       <Text mt={4}>全 {episodesCount} 話</Text>
     </Box>
   )

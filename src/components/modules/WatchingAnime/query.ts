@@ -5,17 +5,12 @@ export const WATCHING_ANIME = gql`
     viewer {
       works(state: WATCHING, orderBy: { field: SEASON, direction: DESC }) {
         nodes {
-          id
+          annictId
           title
           image {
             recommendedImageUrl
           }
           episodesCount
-          episodes {
-            nodes {
-              title
-            }
-          }
         }
       }
     }
