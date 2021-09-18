@@ -1,4 +1,11 @@
-import { Flex, Heading, List, ListItem, Text } from "@chakra-ui/react"
+import {
+  Container,
+  Flex,
+  Heading,
+  List,
+  ListItem,
+  Text,
+} from "@chakra-ui/react"
 
 import { GetEpisodeListQuery } from "@/generated/graphql"
 
@@ -7,21 +14,26 @@ interface Props {
 }
 export const EpisodeList: React.FC<Props> = ({ data }) => {
   const work = data.searchWorks?.edges ? data.searchWorks?.edges[0] : null
+  const fontSize = "sm"
   return (
-    <>
-      <Heading>{work?.node?.title}</Heading>
+    <Container>
+      <Heading p={4} size="md">
+        {work?.node?.title}
+      </Heading>
       <List>
         {work?.node?.episodes?.edges?.map((episode) =>
           episode ? (
             <ListItem key={episode.node?.id}>
-              <Flex justify="space-around">
-                <Text>{episode.node?.numberText}</Text>
-                <Text>
+              <Flex justify="space-between">
+                <Text fontSize={fontSize} width="3rem">
+                  {episode.node?.numberText}
+                </Text>
+                <Text fontSize={fontSize} flex={1}>
                   {episode.node?.title
                     ? episode.node?.title
                     : "（タイトル未定）"}
                 </Text>
-                <Text>
+                <Text fontSize={fontSize} width="4rem">
                   {episode.node?.viewerDidTrack ? "視聴済み" : "未視聴"}
                 </Text>
               </Flex>
@@ -29,6 +41,6 @@ export const EpisodeList: React.FC<Props> = ({ data }) => {
           ) : null
         )}
       </List>
-    </>
+    </Container>
   )
 }
