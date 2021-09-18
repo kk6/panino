@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/client"
 
-import { Loading } from "@/components/Loading"
+import { Loading } from "@/components/elements/Loading"
 import { useWatchingAnimeQuery } from "@/generated/graphql"
 
 import { WatchingAnime } from "./WatchingAnime"

@@ -12,7 +12,7 @@ import { DefaultSession } from "next-auth"
 import { signOut } from "next-auth/client"
 import React from "react"
 
-const Header: React.FC<DefaultSession> = ({ user }) => {
+export const Header: React.FC<DefaultSession> = ({ user }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleToggle = () => (isOpen ? onClose() : onOpen())
 
@@ -71,5 +71,3 @@ const Header: React.FC<DefaultSession> = ({ user }) => {
     </Flex>
   )
 }
-
-export default Header
