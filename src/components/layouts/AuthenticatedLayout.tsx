@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/layout"
 import { useSession } from "next-auth/client"
 
 import { Footer } from "@/components/modules/Footer"
@@ -8,7 +9,7 @@ export const AuthenticatedLayout: React.FC = ({ children }) => {
   return (
     <>
       <Header user={session?.user} />
-      {children}
+      <Box mb={24}>{children}</Box>
       <Footer />
     </>
   )

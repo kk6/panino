@@ -23,8 +23,7 @@ export const Header: React.FC<DefaultSession> = ({ user }) => {
       justify="space-between"
       wrap="wrap"
       p={4}
-      bg="pink.500"
-      color="white"
+      bg="yellow.200"
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={"tighter"}>

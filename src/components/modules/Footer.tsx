@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export const Footer: React.FC = () => {
   return (
-    <Box pos="fixed" w="100%" bottom={0} bg="pink.200">
+    <Box pos="fixed" w="100%" bottom={0} bg="green.400">
       <Flex mx={4} p={4} justify="space-between">
         <Link href="/home">
           <a>
