@@ -12,6 +12,9 @@ export default NextAuth({
     }),
   ],
   callbacks: {
+    redirect(url, baseUrl) {
+      return url.startsWith(baseUrl) ? url : baseUrl
+    },
     async jwt(token, _user, account, _profile, _isNewUser) {
       if (account?.accessToken) {
         token.accessToken = account.accessToken
