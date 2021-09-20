@@ -12,7 +12,9 @@ export const LoginWithAnnict: React.FC = (): JSX.Element => {
           <Button
             variant="outline"
             colorScheme="pink"
-            onClick={() => signIn("annict")}
+            onClick={() =>
+              signIn("annict", { callbackUrl: process.env.ANNICT_REDIRECT_URI })
+            }
           >
             Annict でログイン
           </Button>
