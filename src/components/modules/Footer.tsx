@@ -1,33 +1,37 @@
-import { HamburgerIcon, SearchIcon, SettingsIcon } from "@chakra-ui/icons"
-import { Box, Flex, Icon, Text, VStack } from "@chakra-ui/react"
+import { Box, Flex, Icon, VStack } from "@chakra-ui/react"
 import Link from "next/link"
+import { IoHomeOutline } from "react-icons/io5"
+import { RiPencilLine, RiSearchLine, RiSettings4Line } from "react-icons/ri"
 
 export const Footer: React.FC = () => {
   return (
-    <Box pos="fixed" w="100%" bottom={0} bg="green.400">
+    <Box pos="fixed" w="100%" bottom={0} bg="white">
       <Flex mx={4} p={4} justify="space-between">
         <Link href="/home">
           <a>
             <VStack>
-              <Icon as={HamburgerIcon} w={6} h={6} />
-              <Text fontSize="xs">Home</Text>
+              <Icon as={IoHomeOutline} w={6} h={6} />
             </VStack>
           </a>
         </Link>
-
+        <Link href="/record">
+          <a>
+            <VStack>
+              <Icon as={RiPencilLine} w={6} h={6} />
+            </VStack>
+          </a>
+        </Link>
         <Link href="/search">
           <a>
             <VStack>
-              <Icon as={SearchIcon} w={6} h={6} />
-              <Text fontSize="xs">探す</Text>
+              <Icon as={RiSearchLine} w={6} h={6} />
             </VStack>
           </a>
         </Link>
         <Link href="/settings">
           <a>
             <VStack>
-              <Icon as={SettingsIcon} w={6} h={6} />
-              <Text fontSize="xs">設定</Text>
+              <Icon as={RiSettings4Line} w={6} h={6} />
             </VStack>
           </a>
         </Link>

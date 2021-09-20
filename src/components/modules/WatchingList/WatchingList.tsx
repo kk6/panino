@@ -8,7 +8,7 @@ interface Props {
 }
 export const WatchingList: React.FC<Props> = ({ data }) => {
   return (
-    <Flex wrap="wrap">
+    <Flex wrap="wrap" bgColor="gray.200">
       {!!data.viewer &&
         !!data.viewer.works &&
         !!data.viewer.works.nodes &&

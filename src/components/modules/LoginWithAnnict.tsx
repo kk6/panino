@@ -10,6 +10,7 @@ export const LoginWithAnnict: React.FC = (): JSX.Element => {
         </Heading>
         <Stack spacing={6}>
           <Button
+            variant="outline"
             colorScheme="pink"
             onClick={() =>
               signIn("annict", {

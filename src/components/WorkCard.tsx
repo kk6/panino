@@ -15,18 +15,17 @@ export const WorkCard: React.FC<Props> = ({
 }) => {
   const href = `works/${annictId}/episodes`
   return (
-    <Flex p={2} alignItems="center" justifyContent="center">
+    <Flex p={2} alignItems="center" justifyContent="center" w="full">
       <Link href={href}>
-        <Box mx="auto" rounded="lg" shadow="md" bg="red.300" maxW="2xl">
+        <Box mx="auto" rounded="lg" shadow="md" maxW="2xl" bg="white">
           <Image
             src={imageUrl ? imageUrl : "no-image.png"}
             roundedTop="lg"
             w="full"
             h={48}
-            bgColor="gray.50"
             fit="cover"
           />
-          <Box p={6}>
+          <Box p={4} bg="white" roundedBottom="lg">
             <Heading fontSize="sm">{title}</Heading>
           </Box>
         </Box>

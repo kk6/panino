@@ -17,14 +17,7 @@ export const Header: React.FC<DefaultSession> = ({ user }) => {
   const handleToggle = () => (isOpen ? onClose() : onOpen())
 
   return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
-      p={4}
-      bg="yellow.200"
-    >
+    <Flex as="nav" align="center" justify="space-between" wrap="wrap" p={4}>
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={"tighter"}>
           {user?.name}
