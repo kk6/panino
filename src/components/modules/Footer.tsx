@@ -1,7 +1,7 @@
 import { Box, Flex, Icon, VStack } from "@chakra-ui/react"
 import Link from "next/link"
-import { IoHomeOutline } from "react-icons/io5"
-import { RiPencilLine, RiSearchLine, RiSettings4Line } from "react-icons/ri"
+import { IoHomeOutline, IoLibraryOutline } from "react-icons/io5"
+import { RiPencilLine, RiSearchLine } from "react-icons/ri"
 
 export const Footer: React.FC = () => {
   return (
@@ -28,10 +28,10 @@ export const Footer: React.FC = () => {
             </VStack>
           </a>
         </Link>
-        <Link href="/settings">
+        <Link href="/library">
           <a>
             <VStack>
-              <Icon as={RiSettings4Line} w={6} h={6} />
+              <Icon as={IoLibraryOutline} w={6} h={6} />
             </VStack>
           </a>
         </Link>

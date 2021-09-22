@@ -1271,6 +1271,11 @@ export type GetEpisodeListQueryVariables = Exact<{
 
 export type GetEpisodeListQuery = { __typename?: 'Query', searchWorks?: Maybe<{ __typename?: 'WorkConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'WorkEdge', node?: Maybe<{ __typename?: 'Work', id: string, annictId: number, title: string, viewerStatusState?: Maybe<StatusState>, episodes?: Maybe<{ __typename?: 'EpisodeConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'EpisodeEdge', node?: Maybe<{ __typename?: 'Episode', id: string, number?: Maybe<number>, numberText?: Maybe<string>, title?: Maybe<string>, viewerDidTrack: boolean }> }>>> }> }> }>>> }> };
 
+export type GetUserInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserInfoQuery = { __typename?: 'Query', viewer?: Maybe<{ __typename?: 'User', name: string, username: string, avatarUrl?: Maybe<string>, watchingCount: number, wannaWatchCount: number, watchedCount: number, onHoldCount: number, stopWatchingCount: number, recordsCount: number }> };
+
 export type WatchingAnimeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1330,6 +1335,48 @@ export function useGetEpisodeListLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type GetEpisodeListQueryHookResult = ReturnType<typeof useGetEpisodeListQuery>;
 export type GetEpisodeListLazyQueryHookResult = ReturnType<typeof useGetEpisodeListLazyQuery>;
 export type GetEpisodeListQueryResult = Apollo.QueryResult<GetEpisodeListQuery, GetEpisodeListQueryVariables>;
+export const GetUserInfoDocument = gql`
+    query getUserInfo {
+  viewer {
+    name
+    username
+    avatarUrl
+    watchingCount
+    wannaWatchCount
+    watchedCount
+    onHoldCount
+    stopWatchingCount
+    recordsCount
+  }
+}
+    `;
+
+/**
+ * __useGetUserInfoQuery__
+ *
+ * To run a query within a React component, call `useGetUserInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserInfoQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserInfoQuery(baseOptions?: Apollo.QueryHookOptions<GetUserInfoQuery, GetUserInfoQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserInfoQuery, GetUserInfoQueryVariables>(GetUserInfoDocument, options);
+      }
+export function useGetUserInfoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserInfoQuery, GetUserInfoQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserInfoQuery, GetUserInfoQueryVariables>(GetUserInfoDocument, options);
+        }
+export type GetUserInfoQueryHookResult = ReturnType<typeof useGetUserInfoQuery>;
+export type GetUserInfoLazyQueryHookResult = ReturnType<typeof useGetUserInfoLazyQuery>;
+export type GetUserInfoQueryResult = Apollo.QueryResult<GetUserInfoQuery, GetUserInfoQueryVariables>;
 export const WatchingAnimeDocument = gql`
     query WatchingAnime {
   viewer {
