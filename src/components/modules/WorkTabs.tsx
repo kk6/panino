@@ -35,9 +35,19 @@ export const WorkTabs: React.FC<Props> = ({
   const tabIndex = TAB_PATHS.indexOf(String(router.query.path))
   return (
     <Tabs variant="soft-rounded" colorScheme="blue" defaultIndex={tabIndex}>
-      <TabList display="flex" flexWrap="wrap" justifyContent="center">
+      <TabList
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="center"
+        position="sticky"
+        top={0}
+        bg="white"
+        shadow="md"
+        px={2}
+        roundedBottom="xl"
+      >
         <Link href="watching">
-          <Tab fontSize="sm">
+          <Tab fontSize="xs">
             見てる
             <Badge rounded="lg" ml={1}>
               {watchingCount}
@@ -45,7 +55,7 @@ export const WorkTabs: React.FC<Props> = ({
           </Tab>
         </Link>
         <Link href="watched">
-          <Tab fontSize="sm">
+          <Tab fontSize="xs">
             見た
             <Badge rounded="lg" ml={1}>
               {watchedCount}
@@ -53,7 +63,7 @@ export const WorkTabs: React.FC<Props> = ({
           </Tab>
         </Link>
         <Link href="wanna-watch">
-          <Tab fontSize="sm">
+          <Tab fontSize="xs">
             見たい
             <Badge rounded="lg" ml={1}>
               {wannaWatchCount}
@@ -61,7 +71,7 @@ export const WorkTabs: React.FC<Props> = ({
           </Tab>
         </Link>
         <Link href="on-hold">
-          <Tab fontSize="sm">
+          <Tab fontSize="xs">
             中断
             <Badge rounded="lg" ml={1}>
               {onHoldCount}
@@ -69,7 +79,7 @@ export const WorkTabs: React.FC<Props> = ({
           </Tab>
         </Link>
         <Link href="stop-watching">
-          <Tab fontSize="sm">
+          <Tab fontSize="xs">
             中止
             <Badge rounded="lg" ml={1}>
               {stopWatchingCount}
@@ -79,6 +89,60 @@ export const WorkTabs: React.FC<Props> = ({
       </TabList>
       <TabPanels>
         <TabPanel>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
+          <p>見てる</p>
           <p>見てる</p>
         </TabPanel>
         <TabPanel>
