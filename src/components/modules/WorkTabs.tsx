@@ -6,6 +6,16 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react"
+import Link from "next/link"
+import { useRouter } from "next/router"
+
+const TAB_PATHS = [
+  "watching",
+  "watched",
+  "wanna-watch",
+  "on-hold",
+  "stop-watching",
+]
 
 interface Props {
   watchingCount: number | undefined
@@ -21,39 +31,51 @@ export const WorkTabs: React.FC<Props> = ({
   onHoldCount,
   stopWatchingCount,
 }) => {
+  const router = useRouter()
+  const tabIndex = TAB_PATHS.indexOf(String(router.query.path))
   return (
-    <Tabs variant="soft-rounded" colorScheme="blue">
+    <Tabs variant="soft-rounded" colorScheme="blue" defaultIndex={tabIndex}>
       <TabList display="flex" flexWrap="wrap" justifyContent="center">
-        <Tab fontSize="sm">
-          見てる
-          <Badge rounded="lg" ml={1}>
-            {watchingCount}
-          </Badge>
-        </Tab>
-        <Tab fontSize="sm">
-          見た
-          <Badge rounded="lg" ml={1}>
-            {watchedCount}
-          </Badge>
-        </Tab>
-        <Tab fontSize="sm">
-          見たい
-          <Badge rounded="lg" ml={1}>
-            {wannaWatchCount}
-          </Badge>
-        </Tab>
-        <Tab fontSize="sm">
-          中断
-          <Badge rounded="lg" ml={1}>
-            {onHoldCount}
-          </Badge>
-        </Tab>
-        <Tab fontSize="sm">
-          中止
-          <Badge rounded="lg" ml={1}>
-            {stopWatchingCount}
-          </Badge>
-        </Tab>
+        <Link href="watching">
+          <Tab fontSize="sm">
+            見てる
+            <Badge rounded="lg" ml={1}>
+              {watchingCount}
+            </Badge>
+          </Tab>
+        </Link>
+        <Link href="watched">
+          <Tab fontSize="sm">
+            見た
+            <Badge rounded="lg" ml={1}>
+              {watchedCount}
+            </Badge>
+          </Tab>
+        </Link>
+        <Link href="wanna-watch">
+          <Tab fontSize="sm">
+            見たい
+            <Badge rounded="lg" ml={1}>
+              {wannaWatchCount}
+            </Badge>
+          </Tab>
+        </Link>
+        <Link href="on-hold">
+          <Tab fontSize="sm">
+            中断
+            <Badge rounded="lg" ml={1}>
+              {onHoldCount}
+            </Badge>
+          </Tab>
+        </Link>
+        <Link href="stop-watching">
+          <Tab fontSize="sm">
+            中止
+            <Badge rounded="lg" ml={1}>
+              {stopWatchingCount}
+            </Badge>
+          </Tab>
+        </Link>
       </TabList>
       <TabPanels>
         <TabPanel>

@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
             </VStack>
           </a>
         </Link>
-        <Link href="/library">
+        <Link href="/library/watching">
           <a>
             <VStack>
               <Icon as={IoLibraryOutline} w={6} h={6} />
