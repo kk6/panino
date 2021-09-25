@@ -9,6 +9,9 @@ import {
 import Link from "next/link"
 import { useRouter } from "next/router"
 
+import { WorkListContainer } from "@/components/modules/WorkList"
+import { StatusState } from "@/generated/graphql"
+
 const TAB_PATHS = [
   "watching",
   "watched",
@@ -32,6 +35,7 @@ export const WorkTabs: React.FC<Props> = ({
   stopWatchingCount,
 }) => {
   const router = useRouter()
+  const displayCount = 10
   const tabIndex = TAB_PATHS.indexOf(String(router.query.path))
   return (
     <Tabs variant="soft-rounded" colorScheme="blue" defaultIndex={tabIndex}>
@@ -45,6 +49,7 @@ export const WorkTabs: React.FC<Props> = ({
         shadow="md"
         px={2}
         roundedBottom="xl"
+        pb={2}
       >
         <Link href="watching">
           <Tab fontSize="xs">
@@ -89,73 +94,39 @@ export const WorkTabs: React.FC<Props> = ({
       </TabList>
       <TabPanels>
         <TabPanel>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
-          <p>見てる</p>
+          <WorkListContainer
+            count={displayCount}
+            state={StatusState.Watching}
+            workCount={Number(watchingCount)}
+          />
         </TabPanel>
         <TabPanel>
-          <p>見た</p>
+          <WorkListContainer
+            count={displayCount}
+            state={StatusState.Watched}
+            workCount={Number(watchedCount)}
+          />
         </TabPanel>
         <TabPanel>
-          <p>見たい</p>
+          <WorkListContainer
+            count={displayCount}
+            state={StatusState.WannaWatch}
+            workCount={Number(wannaWatchCount)}
+          />
         </TabPanel>
         <TabPanel>
-          <p>一時中断</p>
+          <WorkListContainer
+            count={displayCount}
+            state={StatusState.OnHold}
+            workCount={Number(onHoldCount)}
+          />
         </TabPanel>
         <TabPanel>
-          <p>視聴中止</p>
+          <WorkListContainer
+            count={displayCount}
+            state={StatusState.StopWatching}
+            workCount={Number(stopWatchingCount)}
+          />
         </TabPanel>
       </TabPanels>
     </Tabs>

@@ -23,6 +23,7 @@ export const WatchingList: React.FC<Props> = ({ data }) => {
                 ? work?.image?.recommendedImageUrl
                 : ""
             }
+            media={work?.media}
           />
         ))}
     </Flex>

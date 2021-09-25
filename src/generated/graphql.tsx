@@ -1279,7 +1279,16 @@ export type GetUserInfoQuery = { __typename?: 'Query', viewer?: Maybe<{ __typena
 export type WatchingAnimeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WatchingAnimeQuery = { __typename?: 'Query', viewer?: Maybe<{ __typename?: 'User', works?: Maybe<{ __typename?: 'WorkConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Work', annictId: number, title: string, episodesCount: number, image?: Maybe<{ __typename?: 'WorkImage', recommendedImageUrl?: Maybe<string> }> }>>> }> }> };
+export type WatchingAnimeQuery = { __typename?: 'Query', viewer?: Maybe<{ __typename?: 'User', works?: Maybe<{ __typename?: 'WorkConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Work', annictId: number, title: string, episodesCount: number, media: Media, image?: Maybe<{ __typename?: 'WorkImage', recommendedImageUrl?: Maybe<string> }> }>>> }> }> };
+
+export type GetWorkListQueryVariables = Exact<{
+  state: StatusState;
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetWorkListQuery = { __typename?: 'Query', viewer?: Maybe<{ __typename?: 'User', works?: Maybe<{ __typename?: 'WorkConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'WorkEdge', node?: Maybe<{ __typename?: 'Work', title: string, id: string, annictId: number, media: Media, seasonYear?: Maybe<number>, seasonName?: Maybe<SeasonName>, image?: Maybe<{ __typename?: 'WorkImage', recommendedImageUrl?: Maybe<string> }> }> }>>>, pageInfo: { __typename?: 'PageInfo', endCursor?: Maybe<string>, hasNextPage: boolean } }> }> };
 
 
 export const GetEpisodeListDocument = gql`
@@ -1388,6 +1397,7 @@ export const WatchingAnimeDocument = gql`
           recommendedImageUrl
         }
         episodesCount
+        media
       }
     }
   }
@@ -1420,3 +1430,63 @@ export function useWatchingAnimeLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type WatchingAnimeQueryHookResult = ReturnType<typeof useWatchingAnimeQuery>;
 export type WatchingAnimeLazyQueryHookResult = ReturnType<typeof useWatchingAnimeLazyQuery>;
 export type WatchingAnimeQueryResult = Apollo.QueryResult<WatchingAnimeQuery, WatchingAnimeQueryVariables>;
+export const GetWorkListDocument = gql`
+    query getWorkList($state: StatusState!, $first: Int, $after: String) {
+  viewer {
+    works(
+      state: $state
+      orderBy: {field: SEASON, direction: DESC}
+      first: $first
+      after: $after
+    ) {
+      edges {
+        node {
+          title
+          id
+          annictId
+          media
+          image {
+            recommendedImageUrl
+          }
+          seasonYear
+          seasonName
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetWorkListQuery__
+ *
+ * To run a query within a React component, call `useGetWorkListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetWorkListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetWorkListQuery({
+ *   variables: {
+ *      state: // value for 'state'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useGetWorkListQuery(baseOptions: Apollo.QueryHookOptions<GetWorkListQuery, GetWorkListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetWorkListQuery, GetWorkListQueryVariables>(GetWorkListDocument, options);
+      }
+export function useGetWorkListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetWorkListQuery, GetWorkListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetWorkListQuery, GetWorkListQueryVariables>(GetWorkListDocument, options);
+        }
+export type GetWorkListQueryHookResult = ReturnType<typeof useGetWorkListQuery>;
+export type GetWorkListLazyQueryHookResult = ReturnType<typeof useGetWorkListLazyQuery>;
+export type GetWorkListQueryResult = Apollo.QueryResult<GetWorkListQuery, GetWorkListQueryVariables>;

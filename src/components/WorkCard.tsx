@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image } from "@chakra-ui/react"
+import { Badge, Box, Flex, Heading, Image } from "@chakra-ui/react"
 import Link from "next/link"
 
 interface Props {
@@ -6,28 +6,33 @@ interface Props {
   title: string | undefined
   episodesCount: number | undefined
   imageUrl: string | undefined
+  media: string | undefined
 }
 export const WorkCard: React.FC<Props> = ({
   annictId,
   title,
   episodesCount,
   imageUrl,
+  media,
 }) => {
-  const href = `works/${annictId}/episodes`
+  const href = `/works/${annictId}/episodes`
   return (
     <Flex p={2} alignItems="center" justifyContent="center" w="full">
       <Link href={href}>
         <Box mx="auto" rounded="lg" shadow="md" maxW="2xl" bg="white">
           <Image
-            src={imageUrl ? imageUrl : "no-image.png"}
+            src={imageUrl ? imageUrl : "/no-image.png"}
             roundedTop="lg"
             w="full"
             h={48}
             fit="cover"
           />
-          <Box p={4} bg="white" roundedBottom="lg">
-            <Heading fontSize="sm">{title}</Heading>
-          </Box>
+          <Flex p={4} bg="white" roundedBottom="lg">
+            <Badge>{media}</Badge>
+            <Heading ml={2} fontSize="sm">
+              {title}
+            </Heading>
+          </Flex>
         </Box>
       </Link>
     </Flex>

@@ -11,6 +11,7 @@ export const WATCHING_ANIME = gql`
             recommendedImageUrl
           }
           episodesCount
+          media
         }
       }
     }
