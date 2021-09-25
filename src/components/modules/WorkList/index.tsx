@@ -51,11 +51,11 @@ export const WorkListContainer: React.FC<Props> = ({
     setDataLength(dataLength + count)
   }
 
-  if (loading) {
+  if (loading || !workData) {
     return <Loading />
   }
 
-  if (error || !workData) {
+  if (error) {
     console.error(error)
     return <div>ERROR</div>
   }
