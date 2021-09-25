@@ -38,7 +38,12 @@ export const WorkTabs: React.FC<Props> = ({
   const displayCount = 10
   const tabIndex = TAB_PATHS.indexOf(String(router.query.path))
   return (
-    <Tabs variant="soft-rounded" colorScheme="blue" defaultIndex={tabIndex}>
+    <Tabs
+      variant="soft-rounded"
+      colorScheme="blue"
+      defaultIndex={tabIndex}
+      isLazy
+    >
       <TabList
         display="flex"
         flexWrap="wrap"
