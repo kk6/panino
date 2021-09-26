@@ -1264,12 +1264,20 @@ export enum WorkOrderField {
   WatchersCount = 'WATCHERS_COUNT'
 }
 
+export type UpdateStatusMutationVariables = Exact<{
+  state: StatusState;
+  workId: Scalars['ID'];
+}>;
+
+
+export type UpdateStatusMutation = { __typename?: 'Mutation', updateStatus?: Maybe<{ __typename?: 'UpdateStatusPayload', clientMutationId?: Maybe<string> }> };
+
 export type GetEpisodeListQueryVariables = Exact<{
   annictId?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetEpisodeListQuery = { __typename?: 'Query', searchWorks?: Maybe<{ __typename?: 'WorkConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'WorkEdge', node?: Maybe<{ __typename?: 'Work', id: string, annictId: number, title: string, viewerStatusState?: Maybe<StatusState>, episodes?: Maybe<{ __typename?: 'EpisodeConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'EpisodeEdge', node?: Maybe<{ __typename?: 'Episode', id: string, number?: Maybe<number>, numberText?: Maybe<string>, title?: Maybe<string>, viewerDidTrack: boolean }> }>>> }> }> }>>> }> };
+export type GetEpisodeListQuery = { __typename?: 'Query', searchWorks?: Maybe<{ __typename?: 'WorkConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'WorkEdge', node?: Maybe<{ __typename?: 'Work', id: string, annictId: number, title: string, viewerStatusState?: Maybe<StatusState>, media: Media, image?: Maybe<{ __typename?: 'WorkImage', recommendedImageUrl?: Maybe<string> }>, episodes?: Maybe<{ __typename?: 'EpisodeConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'EpisodeEdge', node?: Maybe<{ __typename?: 'Episode', id: string, number?: Maybe<number>, numberText?: Maybe<string>, title?: Maybe<string>, viewerDidTrack: boolean }> }>>> }> }> }>>> }> };
 
 export type GetUserInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1291,6 +1299,40 @@ export type GetWorkListQueryVariables = Exact<{
 export type GetWorkListQuery = { __typename?: 'Query', viewer?: Maybe<{ __typename?: 'User', works?: Maybe<{ __typename?: 'WorkConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'WorkEdge', node?: Maybe<{ __typename?: 'Work', title: string, id: string, annictId: number, media: Media, seasonYear?: Maybe<number>, seasonName?: Maybe<SeasonName>, image?: Maybe<{ __typename?: 'WorkImage', recommendedImageUrl?: Maybe<string> }> }> }>>>, pageInfo: { __typename?: 'PageInfo', endCursor?: Maybe<string>, hasNextPage: boolean } }> }> };
 
 
+export const UpdateStatusDocument = gql`
+    mutation updateStatus($state: StatusState!, $workId: ID!) {
+  updateStatus(input: {state: $state, workId: $workId}) {
+    clientMutationId
+  }
+}
+    `;
+export type UpdateStatusMutationFn = Apollo.MutationFunction<UpdateStatusMutation, UpdateStatusMutationVariables>;
+
+/**
+ * __useUpdateStatusMutation__
+ *
+ * To run a mutation, you first call `useUpdateStatusMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateStatusMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateStatusMutation, { data, loading, error }] = useUpdateStatusMutation({
+ *   variables: {
+ *      state: // value for 'state'
+ *      workId: // value for 'workId'
+ *   },
+ * });
+ */
+export function useUpdateStatusMutation(baseOptions?: Apollo.MutationHookOptions<UpdateStatusMutation, UpdateStatusMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateStatusMutation, UpdateStatusMutationVariables>(UpdateStatusDocument, options);
+      }
+export type UpdateStatusMutationHookResult = ReturnType<typeof useUpdateStatusMutation>;
+export type UpdateStatusMutationResult = Apollo.MutationResult<UpdateStatusMutation>;
+export type UpdateStatusMutationOptions = Apollo.BaseMutationOptions<UpdateStatusMutation, UpdateStatusMutationVariables>;
 export const GetEpisodeListDocument = gql`
     query getEpisodeList($annictId: [Int!]) {
   searchWorks(annictIds: $annictId) {
@@ -1300,6 +1342,10 @@ export const GetEpisodeListDocument = gql`
         annictId
         title
         viewerStatusState
+        image {
+          recommendedImageUrl
+        }
+        media
         episodes(orderBy: {field: SORT_NUMBER, direction: ASC}) {
           edges {
             node {

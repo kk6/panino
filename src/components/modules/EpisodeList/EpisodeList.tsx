@@ -1,17 +1,21 @@
 import {
+  Badge,
   Box,
   Container,
   Flex,
   Heading,
   Icon,
+  Image,
   List,
   ListItem,
   StackDivider,
   Text,
   VStack,
 } from "@chakra-ui/react"
+import React from "react"
 import { ImCheckmark, ImCheckmark2 } from "react-icons/im"
 
+import { StatusSelect } from "@/components/elements/StatusSelect"
 import { GetEpisodeListQuery } from "@/generated/graphql"
 
 interface Props {
@@ -20,12 +24,34 @@ interface Props {
 export const EpisodeList: React.FC<Props> = ({ data }) => {
   const work = data.searchWorks?.edges ? data.searchWorks?.edges[0] : null
   const fontSize = "sm"
+  const onChangeFunc = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value)
+  }
+
+  const state = work?.node?.viewerStatusState?.toString()
   return (
     <Container>
-      <Heading p={4} size="md">
-        {work?.node?.title}
-      </Heading>
+      <Image
+        src={
+          work?.node?.image?.recommendedImageUrl
+            ? work.node.image.recommendedImageUrl
+            : "/no-image.png"
+        }
+        alt={work?.node?.title}
+      />
+      <Flex justify="space-between" alignItems="center">
+        <Flex alignItems="center">
+          <Badge>{work?.node?.media}</Badge>
+          <Heading p={4} size="sm">
+            {work?.node?.title}
+          </Heading>
+        </Flex>
+        <Flex>
+          <StatusSelect state={state} onChangeFunc={onChangeFunc} />
+        </Flex>
+      </Flex>
       <VStack
+        mt={4}
         as={List}
         divider={<StackDivider borderColor="gray.200" />}
         spacing={4}

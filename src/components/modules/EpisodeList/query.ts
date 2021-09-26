@@ -9,6 +9,10 @@ export const GET_EPISODE_LIST = gql`
           annictId
           title
           viewerStatusState
+          image {
+            recommendedImageUrl
+          }
+          media
           episodes(orderBy: { field: SORT_NUMBER, direction: ASC }) {
             edges {
               node {
