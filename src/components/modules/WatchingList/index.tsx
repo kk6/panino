@@ -1,15 +1,10 @@
-import { useSession } from "next-auth/client"
-
 import { Loading } from "@/components/elements/Loading"
 import { useWatchingAnimeQuery } from "@/generated/graphql"
 
 import { WatchingList } from "./WatchingList"
 
 export const WatchingListContainer: React.FC = () => {
-  const [session, _loading] = useSession()
-  const { data, loading, error } = useWatchingAnimeQuery({
-    context: { headers: { Authorization: `bearer ${session?.accessToken}` } },
-  })
+  const { data, loading, error } = useWatchingAnimeQuery()
   if (loading) {
     return <Loading />
   }

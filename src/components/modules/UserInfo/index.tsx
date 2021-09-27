@@ -1,15 +1,10 @@
-import { useSession } from "next-auth/client"
-
 import { Loading } from "@/components/elements/Loading"
 import { useGetUserInfoQuery } from "@/generated/graphql"
 
 import { UserInfo } from "./UserInfo"
 
 export const UserInfoContainer: React.FC = () => {
-  const [session, _loading] = useSession()
-  const { data, loading, error } = useGetUserInfoQuery({
-    context: { headers: { Authorization: `bearer ${session?.accessToken}` } },
-  })
+  const { data, loading, error } = useGetUserInfoQuery()
   if (loading) {
     return <Loading />
   }

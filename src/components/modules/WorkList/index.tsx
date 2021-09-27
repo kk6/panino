@@ -1,5 +1,4 @@
 import { Flex } from "@chakra-ui/react"
-import { useSession } from "next-auth/client"
 import { useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 
@@ -22,7 +21,6 @@ export const WorkListContainer: React.FC<Props> = ({
   state,
   workCount,
 }) => {
-  const [session, _loading] = useSession()
   const [workData, setWorkData] = useState<Maybe<WorkEdge>[] | undefined>([])
   const [hasNextPage, setHasNextPage] = useState<boolean | undefined>(true)
   const [cursor, setCursor] = useState<string | null | undefined>(null)
@@ -30,7 +28,6 @@ export const WorkListContainer: React.FC<Props> = ({
 
   const { data, loading, error, fetchMore } = useGetWorkListQuery({
     variables: { state: state, first: count, after: null },
-    context: { headers: { Authorization: `bearer ${session?.accessToken}` } },
   })
   useEffect(() => {
     // @ts-ignore
@@ -42,7 +39,6 @@ export const WorkListContainer: React.FC<Props> = ({
   const handleFetchMore = async () => {
     const { data } = await fetchMore({
       variables: { after: cursor },
-      context: { headers: { Authorization: `bearer ${session?.accessToken}` } },
     })
     // @ts-ignore
     setWorkData([...workData, ...data.viewer?.works?.edges])
