@@ -13,7 +13,7 @@ import {
 
 import { WorkTabs } from "@/components/modules/WorkTabs"
 
-interface Props {
+type Props = {
   name: string | undefined
   username: string | undefined
   avatarUrl: string | undefined

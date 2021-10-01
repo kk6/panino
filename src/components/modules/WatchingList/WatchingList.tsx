@@ -3,7 +3,7 @@ import { Flex } from "@chakra-ui/react"
 import { WorkCard } from "@/components/WorkCard"
 import { WatchingAnimeQuery } from "@/generated/graphql"
 
-interface Props {
+type Props = {
   data: WatchingAnimeQuery
 }
 export const WatchingList: React.FC<Props> = ({ data }) => {

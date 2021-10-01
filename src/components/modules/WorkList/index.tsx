@@ -11,7 +11,7 @@ import {
   WorkEdge,
 } from "@/generated/graphql"
 
-interface Props {
+type Props = {
   count: number
   state: StatusState
   workCount: number

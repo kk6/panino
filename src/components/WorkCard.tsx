@@ -1,7 +1,7 @@
 import { Badge, Box, Flex, Heading, Image } from "@chakra-ui/react"
 import Link from "next/link"
 
-interface Props {
+type Props = {
   annictId: number | undefined
   title: string | undefined
   episodesCount: number | undefined

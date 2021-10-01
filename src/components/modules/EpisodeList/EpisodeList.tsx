@@ -18,7 +18,7 @@ import { ImCheckmark, ImCheckmark2 } from "react-icons/im"
 import { StatusSelect } from "@/components/elements/StatusSelect"
 import { GetEpisodeListQuery } from "@/generated/graphql"
 
-interface Props {
+type Props = {
   data: GetEpisodeListQuery
 }
 export const EpisodeList: React.FC<Props> = ({ data }) => {

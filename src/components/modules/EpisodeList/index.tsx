@@ -3,7 +3,7 @@ import { useGetEpisodeListQuery } from "@/generated/graphql"
 
 import { EpisodeList } from "./EpisodeList"
 
-interface Props {
+type Props = {
   workId: number
 }
 export const EpisodeListContainer: React.FC<Props> = ({ workId }) => {

@@ -2,7 +2,7 @@ import { Select } from "@chakra-ui/react"
 
 import { StatusState } from "@/generated/graphql"
 
-interface Props {
+type Props = {
   state: string | undefined
   onChangeFunc: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
