@@ -13,7 +13,8 @@ export default function Annict(options) {
     async profile(profile) {
       return {
         id: profile.id,
-        name: profile.username,
+        name: profile.name,
+        username: profile.username,
         email: profile.email,
         image: profile.avatar_url,
       }

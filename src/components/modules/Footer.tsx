@@ -3,10 +3,13 @@ import Link from "next/link"
 import { IoHomeOutline, IoLibraryOutline } from "react-icons/io5"
 import { RiPencilLine, RiSearchLine } from "react-icons/ri"
 
+import { SidebarButton } from "../elements/SidebarButton"
+
 export const Footer: React.FC = () => {
   return (
     <Box pos="fixed" w="100%" bottom={0} bg="white">
       <Flex mx={4} p={4} justify="space-between">
+        <SidebarButton />
         <Link href="/home">
           <a>
             <VStack>
