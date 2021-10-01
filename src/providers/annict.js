@@ -14,7 +14,6 @@ export default function Annict(options) {
       return {
         id: profile.id,
         name: profile.name,
-        username: profile.username,
         email: profile.email,
         image: profile.avatar_url,
       }
