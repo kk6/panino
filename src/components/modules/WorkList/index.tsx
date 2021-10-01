@@ -1,13 +1,7 @@
-import { useEffect, useState } from "react"
-
 import { Loading } from "@/components/elements/Loading"
-import {
-  Maybe,
-  StatusState,
-  useGetWorkListQuery,
-  WorkEdge,
-} from "@/generated/graphql"
+import { StatusState, useGetWorkListQuery } from "@/generated/graphql"
 
+import { useWorksInfiniteScroll } from "./useWorksInfiniteScroll"
 import { WorkList } from "./WorkList"
 
 type Props = {
@@ -20,30 +14,22 @@ export const WorkListContainer: React.FC<Props> = ({
   state,
   workCount,
 }) => {
-  const [workData, setWorkData] = useState<Maybe<WorkEdge>[] | undefined>([])
-  const [hasNextPage, setHasNextPage] = useState<boolean | undefined>(true)
-  const [cursor, setCursor] = useState<string | null | undefined>(null)
-  const [dataLength, setDataLength] = useState(workCount)
-
   const { data, loading, error, fetchMore } = useGetWorkListQuery({
     variables: { state: state, first: count, after: null },
   })
-  useEffect(() => {
-    // @ts-ignore
-    setWorkData(data?.viewer?.works?.edges)
-    setHasNextPage(data?.viewer?.works?.pageInfo.hasNextPage)
-    setCursor(data?.viewer?.works?.pageInfo.endCursor)
-  }, [data])
+  const {
+    workData,
+    hasNextPage,
+    cursor,
+    dataLength,
+    setWorksInfiniteScrollProps,
+  } = useWorksInfiniteScroll(workCount, data)
 
   const handleFetchMore = async () => {
     const { data } = await fetchMore({
       variables: { after: cursor },
     })
-    // @ts-ignore
-    setWorkData([...workData, ...data.viewer?.works?.edges])
-    setHasNextPage(data.viewer?.works?.pageInfo.hasNextPage)
-    setCursor(data.viewer?.works?.pageInfo.endCursor)
-    setDataLength(dataLength + count)
+    setWorksInfiniteScrollProps(data, dataLength, count)
   }
 
   if (loading || !workData) {
