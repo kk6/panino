@@ -13,58 +13,42 @@ import {
 
 import { WorkTabs } from "@/components/modules/WorkTabs"
 
+import { TUserInfo } from "./types"
+
 type Props = {
-  name: string | undefined
-  username: string | undefined
-  avatarUrl: string | undefined
-  watchingCount: number | undefined
-  wannaWatchCount: number | undefined
-  watchedCount: number | undefined
-  onHoldCount: number | undefined
-  stopWatchingCount: number | undefined
-  recordsCount: number | undefined
+  userInfo: TUserInfo
 }
 
-export const UserInfo: React.FC<Props> = ({
-  name,
-  username,
-  avatarUrl,
-  watchingCount,
-  wannaWatchCount,
-  watchedCount,
-  onHoldCount,
-  stopWatchingCount,
-  recordsCount,
-}) => {
+export const UserInfo: React.FC<Props> = ({ userInfo }) => {
   return (
     <>
       <Center>
         <Stack direction="row">
           <Flex justify="center" p={4}>
-            <Avatar size="xl" src={avatarUrl} />
+            <Avatar size="xl" src={userInfo.avatarUrl} />
           </Flex>
           <Flex p={2} alignItems="center">
             <Stack w="full">
               <Heading fontSize="xl" fontWeight={600} w="8rem">
-                {name}
+                {userInfo.name}
               </Heading>
-              <Text color="gray.500">@{username}</Text>
+              <Text color="gray.500">@{userInfo.username}</Text>
             </Stack>
             <Divider />
             <Stat mx={2}>
               <StatLabel>Records</StatLabel>
-              <StatNumber>{recordsCount}</StatNumber>
+              <StatNumber>{userInfo.recordsCount}</StatNumber>
             </Stat>
           </Flex>
         </Stack>
       </Center>
       <Center mt={4}>
         <WorkTabs
-          watchingCount={watchingCount}
-          wannaWatchCount={wannaWatchCount}
-          watchedCount={watchedCount}
-          onHoldCount={onHoldCount}
-          stopWatchingCount={stopWatchingCount}
+          watchingCount={userInfo.watchingCount}
+          wannaWatchCount={userInfo.wannaWatchCount}
+          watchedCount={userInfo.watchedCount}
+          onHoldCount={userInfo.onHoldCount}
+          stopWatchingCount={userInfo.stopWatchingCount}
         />
       </Center>
     </>
