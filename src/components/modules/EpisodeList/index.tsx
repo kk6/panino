@@ -2,6 +2,7 @@ import { Loading } from "@/components/elements/Loading"
 import { useGetEpisodeListQuery } from "@/generated/graphql"
 
 import { EpisodeList } from "./EpisodeList"
+import { mappingWorkWithEpisodes } from "./mappers"
 
 type Props = {
   workId: number
@@ -19,5 +20,7 @@ export const EpisodeListContainer: React.FC<Props> = ({ workId }) => {
     return <div>ERROR</div>
   }
 
-  return <EpisodeList data={data} />
+  const { work, episodes } = mappingWorkWithEpisodes(data)
+
+  return <EpisodeList work={work} episodes={episodes} />
 }
