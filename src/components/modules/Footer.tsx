@@ -1,7 +1,8 @@
 import { Box, Flex, Icon, VStack } from "@chakra-ui/react"
-import Link from "next/link"
 import { IoHomeOutline, IoLibraryOutline } from "react-icons/io5"
 import { RiPencilLine, RiSearchLine } from "react-icons/ri"
+
+import { Link } from "@/components/Link"
 
 import { SidebarButton } from "../elements/SidebarButton"
 

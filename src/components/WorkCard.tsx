@@ -1,5 +1,6 @@
 import { Badge, Box, Flex, Heading, Image } from "@chakra-ui/react"
-import Link from "next/link"
+
+import { Link } from "@/components/Link"
 
 type Props = {
   annictId: number | undefined

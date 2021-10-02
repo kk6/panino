@@ -6,9 +6,9 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react"
-import Link from "next/link"
 import { useRouter } from "next/router"
 
+import { Link } from "@/components/Link"
 import { WorkListContainer } from "@/components/modules/WorkList"
 import { StatusState } from "@/generated/graphql"
 

@@ -20,11 +20,12 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react"
-import Link from "next/link"
 import { signOut, useSession } from "next-auth/client"
 import { BsCheck, BsPause, BsPlay, BsStop } from "react-icons/bs"
 import { IoMenu } from "react-icons/io5"
 import { MdFiberManualRecord } from "react-icons/md"
+
+import { Link } from "@/components/Link"
 
 export const SidebarButton: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
