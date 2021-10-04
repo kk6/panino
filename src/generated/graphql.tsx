@@ -1264,6 +1264,16 @@ export enum WorkOrderField {
   WatchersCount = 'WATCHERS_COUNT'
 }
 
+export type CreateRecordMutationVariables = Exact<{
+  episodeId: Scalars['ID'];
+  ratingState?: Maybe<RatingState>;
+  comment?: Maybe<Scalars['String']>;
+  shareTwitter?: Maybe<Scalars['Boolean']>;
+}>;
+
+
+export type CreateRecordMutation = { __typename?: 'Mutation', createRecord?: Maybe<{ __typename?: 'CreateRecordPayload', clientMutationId?: Maybe<string> }> };
+
 export type UpdateStatusMutationVariables = Exact<{
   state: StatusState;
   workId: Scalars['ID'];
@@ -1299,6 +1309,44 @@ export type GetWorkListQueryVariables = Exact<{
 export type GetWorkListQuery = { __typename?: 'Query', viewer?: Maybe<{ __typename?: 'User', works?: Maybe<{ __typename?: 'WorkConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'WorkEdge', node?: Maybe<{ __typename?: 'Work', title: string, id: string, annictId: number, media: Media, seasonYear?: Maybe<number>, seasonName?: Maybe<SeasonName>, image?: Maybe<{ __typename?: 'WorkImage', recommendedImageUrl?: Maybe<string> }> }> }>>>, pageInfo: { __typename?: 'PageInfo', endCursor?: Maybe<string>, hasNextPage: boolean } }> }> };
 
 
+export const CreateRecordDocument = gql`
+    mutation createRecord($episodeId: ID!, $ratingState: RatingState, $comment: String, $shareTwitter: Boolean) {
+  createRecord(
+    input: {episodeId: $episodeId, ratingState: $ratingState, comment: $comment, shareTwitter: $shareTwitter}
+  ) {
+    clientMutationId
+  }
+}
+    `;
+export type CreateRecordMutationFn = Apollo.MutationFunction<CreateRecordMutation, CreateRecordMutationVariables>;
+
+/**
+ * __useCreateRecordMutation__
+ *
+ * To run a mutation, you first call `useCreateRecordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateRecordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createRecordMutation, { data, loading, error }] = useCreateRecordMutation({
+ *   variables: {
+ *      episodeId: // value for 'episodeId'
+ *      ratingState: // value for 'ratingState'
+ *      comment: // value for 'comment'
+ *      shareTwitter: // value for 'shareTwitter'
+ *   },
+ * });
+ */
+export function useCreateRecordMutation(baseOptions?: Apollo.MutationHookOptions<CreateRecordMutation, CreateRecordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateRecordMutation, CreateRecordMutationVariables>(CreateRecordDocument, options);
+      }
+export type CreateRecordMutationHookResult = ReturnType<typeof useCreateRecordMutation>;
+export type CreateRecordMutationResult = Apollo.MutationResult<CreateRecordMutation>;
+export type CreateRecordMutationOptions = Apollo.BaseMutationOptions<CreateRecordMutation, CreateRecordMutationVariables>;
 export const UpdateStatusDocument = gql`
     mutation updateStatus($state: StatusState!, $workId: ID!) {
   updateStatus(input: {state: $state, workId: $workId}) {

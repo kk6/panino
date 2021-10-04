@@ -15,6 +15,7 @@ import {
 import React from "react"
 import { ImCheckmark, ImCheckmark2 } from "react-icons/im"
 
+import { RecordDialogContainer } from "@/components/elements/RecordDialog"
 import { StatusSelect } from "@/components/elements/StatusSelect"
 
 import { TEpisode, TWork } from "./types"
@@ -22,8 +23,23 @@ import { TEpisode, TWork } from "./types"
 type Props = {
   work: TWork
   episodes: TEpisode[]
+  title: string
+  episodeId: string
+  episodeNumberText: string
+  onClick: (episode: TEpisode) => void
+  isOpen: boolean
+  onClose: () => void
 }
-export const EpisodeList: React.FC<Props> = ({ work, episodes }) => {
+export const EpisodeList: React.FC<Props> = ({
+  work,
+  episodes,
+  title,
+  episodeId,
+  episodeNumberText,
+  onClick,
+  isOpen,
+  onClose,
+}) => {
   const fontSize = "sm"
   const onChangeFunc = (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log(e.target.value)
@@ -52,7 +68,11 @@ export const EpisodeList: React.FC<Props> = ({ work, episodes }) => {
       >
         {episodes.map((episode) =>
           episode ? (
-            <Box as={ListItem} key={episode.id}>
+            <Box
+              as={ListItem}
+              key={episode.id}
+              onClick={() => onClick(episode)}
+            >
               <Flex justify="space-between">
                 <Text fontSize={fontSize} width="4rem">
                   {episode.numberText}
@@ -73,6 +93,13 @@ export const EpisodeList: React.FC<Props> = ({ work, episodes }) => {
           ) : null
         )}
       </VStack>
+      <RecordDialogContainer
+        title={title}
+        episodeId={episodeId}
+        episodeNumberText={episodeNumberText}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </Container>
   )
 }
