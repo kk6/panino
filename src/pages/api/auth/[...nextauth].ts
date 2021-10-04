@@ -9,6 +9,7 @@ export default NextAuth({
     Annict({
       clientId: process.env.ANNICT_CLIENT_ID ?? "",
       clientSecret: process.env.ANNICT_CLIENT_SECRET ?? "",
+      scope: process.env.ANNICT_SCOPE ?? "",
     }),
   ],
   callbacks: {
