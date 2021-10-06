@@ -2,9 +2,9 @@ import { Box, Flex, Icon, VStack } from "@chakra-ui/react"
 import { IoHomeOutline, IoLibraryOutline } from "react-icons/io5"
 import { RiPencilLine, RiSearchLine } from "react-icons/ri"
 
-import { Link } from "@/components/Link"
+import { Link } from "@/components/elements/Link"
 
-import { SidebarButton } from "../elements/SidebarButton"
+import { SidebarButton } from "./SidebarButton"
 
 export const Footer: React.FC = () => {
   return (

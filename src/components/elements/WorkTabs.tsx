@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
 
-import { Link } from "@/components/Link"
+import { Link } from "@/components/elements/Link"
 import { WorkListContainer } from "@/components/modules/WorkList"
 import { StatusState } from "@/generated/graphql"
 
@@ -20,7 +20,7 @@ const TAB_PATHS = [
   "stop-watching",
 ]
 
-interface Props {
+type Props = {
   watchingCount: number | undefined
   wannaWatchCount: number | undefined
   watchedCount: number | undefined

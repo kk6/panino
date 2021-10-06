@@ -2,7 +2,7 @@ import { Flex } from "@chakra-ui/react"
 import InfiniteScroll from "react-infinite-scroll-component"
 
 import { Loading } from "@/components/elements/Loading"
-import { WorkCard } from "@/components/WorkCard"
+import { WorkCard } from "@/components/elements/WorkCard"
 import { Maybe, WorkEdge } from "@/generated/graphql"
 
 type Props = {

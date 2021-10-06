@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react"
 
-import { WorkCard } from "@/components/WorkCard"
+import { WorkCard } from "@/components/elements/WorkCard"
 import { WatchingAnimeQuery } from "@/generated/graphql"
 
 type Props = {

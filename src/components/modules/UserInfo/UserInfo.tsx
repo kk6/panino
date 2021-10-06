@@ -11,7 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react"
 
-import { WorkTabs } from "@/components/modules/WorkTabs"
+import { WorkTabs } from "@/components/elements/WorkTabs"
 
 import { TUserInfo } from "./types"
 

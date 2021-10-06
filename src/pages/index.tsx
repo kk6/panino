@@ -2,7 +2,7 @@ import type { NextPage } from "next"
 import Head from "next/head"
 
 import { AuthCheck } from "@/components/elements/AuthCheck"
-import { LoginWithAnnict } from "@/components/modules/LoginWithAnnict"
+import { LoginWithAnnict } from "@/components/elements/LoginWithAnnict"
 
 const Index: NextPage = () => {
   return (

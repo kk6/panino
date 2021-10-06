@@ -25,7 +25,7 @@ import { BsCheck, BsPause, BsPlay, BsStop } from "react-icons/bs"
 import { IoMenu } from "react-icons/io5"
 import { MdFiberManualRecord } from "react-icons/md"
 
-import { Link } from "@/components/Link"
+import { Link } from "@/components/elements/Link"
 
 export const SidebarButton: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
