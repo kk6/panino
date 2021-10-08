@@ -21,11 +21,11 @@ const TAB_PATHS = [
 ]
 
 type Props = {
-  watchingCount: number | undefined
-  wannaWatchCount: number | undefined
-  watchedCount: number | undefined
-  onHoldCount: number | undefined
-  stopWatchingCount: number | undefined
+  watchingCount: number
+  wannaWatchCount: number
+  watchedCount: number
+  onHoldCount: number
+  stopWatchingCount: number
 }
 export const WorkTabs: React.FC<Props> = ({
   watchingCount,

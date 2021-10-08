@@ -3,7 +3,7 @@ import { Select } from "@chakra-ui/react"
 import { StatusState } from "@/generated/graphql"
 
 type Props = {
-  state: string | undefined
+  state: string
   onChangeFunc: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 export const StatusSelect: React.FC<Props> = ({ state, onChangeFunc }) => {
