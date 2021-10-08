@@ -1,5 +1,5 @@
 export const dispatch = (loading: boolean, path: string, hasUser: boolean) => {
-  let dist = ""
+  let dist
   if (path === "/" && hasUser) {
     dist = "/home"
   } else if (!loading && !hasUser) {
