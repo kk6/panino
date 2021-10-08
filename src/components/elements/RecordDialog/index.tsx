@@ -1,8 +1,4 @@
-import { useToast } from "@chakra-ui/toast"
-import { useRef } from "react"
-
-import { RatingState, useCreateRecordMutation } from "@/generated/graphql"
-
+import { useRecordDialog } from "./hooks"
 import { RecordDialog } from "./RecordDialog"
 
 type Props = {
@@ -19,33 +15,12 @@ export const RecordDialogContainer: React.FC<Props> = ({
   isOpen,
   onClose,
 }) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
-  const ratingRef = useRef<HTMLSelectElement>(null)
-  const [createRecord] = useCreateRecordMutation()
-  const toast = useToast()
-
-  const handleClick = () => {
-    const comment = textareaRef.current?.value
-    const rating = ratingRef.current?.value
-
-    createRecord({
-      variables: {
-        episodeId: episodeId,
-        ratingState: getRatingState(rating),
-        comment: comment,
-      },
-    })
-
-    onClose()
-
-    toast({
-      title: `${episodeNumberText} ${title}`,
-      description: "記録しました。",
-      status: "success",
-      duration: 4000,
-      isClosable: true,
-    })
-  }
+  const { textareaRef, ratingRef, submitRecord } = useRecordDialog(
+    episodeId,
+    episodeNumberText,
+    title,
+    onClose
+  )
   return (
     <RecordDialog
       title={title}
@@ -54,29 +29,9 @@ export const RecordDialogContainer: React.FC<Props> = ({
       textareaRef={textareaRef}
       ratingRef={ratingRef}
       shareTwitter={false}
-      onSubmit={handleClick}
+      onSubmit={submitRecord}
       isOpen={isOpen}
       onClose={onClose}
     />
   )
-}
-
-const getRatingState = (
-  rating: string | undefined
-): RatingState | undefined => {
-  if (!rating) {
-    return
-  }
-  switch (rating) {
-    case "GREAT":
-      return RatingState.Great
-    case "GOOD":
-      return RatingState.Good
-    case "AVERAGE":
-      return RatingState.Average
-    case "BAD":
-      return RatingState.Bad
-    default:
-      return
-  }
 }
