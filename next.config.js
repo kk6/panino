@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { withSentryConfig } = require("@sentry/nextjs")
+
+const moduleExports = {
   reactStrictMode: true,
   async redirects() {
     return [
@@ -11,3 +15,9 @@ module.exports = {
     ]
   },
 }
+
+const SentryWebpackPluginOptions = {
+  silent: true,
+}
+
+module.exports = withSentryConfig(moduleExports, SentryWebpackPluginOptions)
