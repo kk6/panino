@@ -1,27 +1,21 @@
 import { useDisclosure } from "@chakra-ui/hooks"
-import { useState } from "react"
 
 import { Loading } from "@/components/elements/Loading"
 import { useGetEpisodeListQuery } from "@/generated/graphql"
 
 import { EpisodeList } from "./EpisodeList"
+import { useOnChangeStatus, useOnClickEpisodeRow } from "./hooks"
 import { mappingWorkWithEpisodes } from "./mappers"
-import { TEpisode } from "./types"
 
 type Props = {
   workId: number
 }
 export const EpisodeListContainer: React.FC<Props> = ({ workId }) => {
   const { onOpen, isOpen, onClose } = useDisclosure()
-  const [title, setTitle] = useState("")
-  const [episodeId, setEpisodeId] = useState("")
-  const [episodeNumberText, setEpisodeNumberText] = useState("")
-  const onClickEpisodeRow = (episode: TEpisode) => {
-    setTitle(episode.title)
-    setEpisodeId(episode.id)
-    setEpisodeNumberText(episode.numberText)
-    onOpen()
-  }
+  const { onClickEpisodeRow, title, episodeId, episodeNumberText } =
+    useOnClickEpisodeRow()
+  const { onChangeStatus } = useOnChangeStatus()
+
   const { data, loading, error } = useGetEpisodeListQuery({
     variables: { annictId: workId },
   })
@@ -43,9 +37,11 @@ export const EpisodeListContainer: React.FC<Props> = ({ workId }) => {
       title={title}
       episodeId={episodeId}
       episodeNumberText={episodeNumberText}
-      onClick={onClickEpisodeRow}
-      isOpen={isOpen}
-      onClose={onClose}
+      onClickEpisodeRow={onClickEpisodeRow}
+      isOpenRecordDialog={isOpen}
+      onOpenRecordDialog={onOpen}
+      onCloseRecordDialog={onClose}
+      onChangeStatus={onChangeStatus}
     />
   )
 }

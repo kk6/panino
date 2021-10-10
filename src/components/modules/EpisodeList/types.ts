@@ -1,4 +1,5 @@
 export type TWork = {
+  id: string
   state: string
   image: string
   title: string

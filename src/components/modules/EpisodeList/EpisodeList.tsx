@@ -26,9 +26,14 @@ type Props = {
   title: string
   episodeId: string
   episodeNumberText: string
-  onClick: (episode: TEpisode) => void
-  isOpen: boolean
-  onClose: () => void
+  onClickEpisodeRow: (episode: TEpisode, onOpenRecordDialog: () => void) => void
+  isOpenRecordDialog: boolean
+  onOpenRecordDialog: () => void
+  onCloseRecordDialog: () => void
+  onChangeStatus: (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    workId: string
+  ) => void
 }
 export const EpisodeList: React.FC<Props> = ({
   work,
@@ -36,14 +41,13 @@ export const EpisodeList: React.FC<Props> = ({
   title,
   episodeId,
   episodeNumberText,
-  onClick,
-  isOpen,
-  onClose,
+  onClickEpisodeRow,
+  isOpenRecordDialog,
+  onOpenRecordDialog,
+  onCloseRecordDialog,
+  onChangeStatus,
 }) => {
   const fontSize = "sm"
-  const onChangeFunc = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value)
-  }
 
   return (
     <Container>
@@ -56,7 +60,10 @@ export const EpisodeList: React.FC<Props> = ({
           </Heading>
         </Flex>
         <Flex>
-          <StatusSelect state={work.state} onChangeFunc={onChangeFunc} />
+          <StatusSelect
+            state={work.state}
+            onChangeFunc={(e) => onChangeStatus(e, work.id)}
+          />
         </Flex>
       </Flex>
       <VStack
@@ -71,7 +78,7 @@ export const EpisodeList: React.FC<Props> = ({
             <Box
               as={ListItem}
               key={episode.id}
-              onClick={() => onClick(episode)}
+              onClick={() => onClickEpisodeRow(episode, onOpenRecordDialog)}
             >
               <Flex justify="space-between">
                 <Text fontSize={fontSize} width="4rem">
@@ -97,8 +104,8 @@ export const EpisodeList: React.FC<Props> = ({
         title={title}
         episodeId={episodeId}
         episodeNumberText={episodeNumberText}
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={isOpenRecordDialog}
+        onClose={onCloseRecordDialog}
       />
     </Container>
   )
