@@ -7,14 +7,15 @@ type Props = {
   onChangeFunc: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 export const StatusSelect: React.FC<Props> = ({ state, onChangeFunc }) => {
+  console.log(state)
   return (
     <Select
       size="sm"
       rounded="md"
-      placeholder="..."
       onChange={(e) => onChangeFunc(e)}
       defaultValue={state}
     >
+      <option value={StatusState.NoState}>未選択</option>
       <option value={StatusState.Watching}>見てる</option>
       <option value={StatusState.Watched}>見た</option>
       <option value={StatusState.WannaWatch}>見たい</option>

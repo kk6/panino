@@ -7,6 +7,7 @@ import { TEpisode, TWork } from "./types"
 // eslint-disable-next-line
 const mappingWorkData = (work: any): TWork => {
   return {
+    id: work?.node?.id || "",
     state: work?.node?.viewerStatusState?.toString() || "",
     image: work?.node?.image?.recommendedImageUrl
       ? work.node.image.recommendedImageUrl
