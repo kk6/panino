@@ -20,7 +20,8 @@ export const useOnChangeStatus = () => {
       },
     })
     toast({
-      description: "記録しました。",
+      title: "ステータス更新",
+      description: "更新しました。",
       status: "success",
       duration: 4000,
       isClosable: true,
