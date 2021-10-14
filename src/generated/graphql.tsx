@@ -1274,6 +1274,11 @@ export type CreateRecordMutationVariables = Exact<{
 
 export type CreateRecordMutation = { __typename?: 'Mutation', createRecord?: Maybe<{ __typename?: 'CreateRecordPayload', clientMutationId?: Maybe<string> }> };
 
+export type GetWorkTabsCountsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetWorkTabsCountsQuery = { __typename?: 'Query', viewer?: Maybe<{ __typename?: 'User', watchingCount: number, wannaWatchCount: number, watchedCount: number, onHoldCount: number, stopWatchingCount: number }> };
+
 export type UpdateStatusMutationVariables = Exact<{
   state: StatusState;
   workId: Scalars['ID'];
@@ -1347,6 +1352,44 @@ export function useCreateRecordMutation(baseOptions?: Apollo.MutationHookOptions
 export type CreateRecordMutationHookResult = ReturnType<typeof useCreateRecordMutation>;
 export type CreateRecordMutationResult = Apollo.MutationResult<CreateRecordMutation>;
 export type CreateRecordMutationOptions = Apollo.BaseMutationOptions<CreateRecordMutation, CreateRecordMutationVariables>;
+export const GetWorkTabsCountsDocument = gql`
+    query getWorkTabsCounts {
+  viewer {
+    watchingCount
+    wannaWatchCount
+    watchedCount
+    onHoldCount
+    stopWatchingCount
+  }
+}
+    `;
+
+/**
+ * __useGetWorkTabsCountsQuery__
+ *
+ * To run a query within a React component, call `useGetWorkTabsCountsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetWorkTabsCountsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetWorkTabsCountsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetWorkTabsCountsQuery(baseOptions?: Apollo.QueryHookOptions<GetWorkTabsCountsQuery, GetWorkTabsCountsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetWorkTabsCountsQuery, GetWorkTabsCountsQueryVariables>(GetWorkTabsCountsDocument, options);
+      }
+export function useGetWorkTabsCountsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetWorkTabsCountsQuery, GetWorkTabsCountsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetWorkTabsCountsQuery, GetWorkTabsCountsQueryVariables>(GetWorkTabsCountsDocument, options);
+        }
+export type GetWorkTabsCountsQueryHookResult = ReturnType<typeof useGetWorkTabsCountsQuery>;
+export type GetWorkTabsCountsLazyQueryHookResult = ReturnType<typeof useGetWorkTabsCountsLazyQuery>;
+export type GetWorkTabsCountsQueryResult = Apollo.QueryResult<GetWorkTabsCountsQuery, GetWorkTabsCountsQueryVariables>;
 export const UpdateStatusDocument = gql`
     mutation updateStatus($state: StatusState!, $workId: ID!) {
   updateStatus(input: {state: $state, workId: $workId}) {
