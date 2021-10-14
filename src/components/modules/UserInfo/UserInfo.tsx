@@ -11,8 +11,6 @@ import {
   Text,
 } from "@chakra-ui/react"
 
-import { WorkTabs } from "@/components/elements/WorkTabs"
-
 import { TUserInfo } from "./types"
 
 type Props = {
@@ -41,15 +39,6 @@ export const UserInfo: React.FC<Props> = ({ userInfo }) => {
             </Stat>
           </Flex>
         </Stack>
-      </Center>
-      <Center mt={4}>
-        <WorkTabs
-          watchingCount={userInfo.watchingCount}
-          wannaWatchCount={userInfo.wannaWatchCount}
-          watchedCount={userInfo.watchedCount}
-          onHoldCount={userInfo.onHoldCount}
-          stopWatchingCount={userInfo.stopWatchingCount}
-        />
       </Center>
     </>
   )
