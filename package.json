@@ -53,5 +53,9 @@
     "prettier": "^2.4.0",
     "react-test-renderer": "^17.0.2",
     "typescript": "4.4.3"
+  },
+  "volta": {
+    "node": "15.14.0",
+    "yarn": "1.22.10"
   }
 }
