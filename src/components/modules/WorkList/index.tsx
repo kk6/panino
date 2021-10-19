@@ -5,17 +5,13 @@ import { useWorksInfiniteScroll } from "./useWorksInfiniteScroll"
 import { WorkList } from "./WorkList"
 
 type Props = {
-  count: number
   state: StatusState
   workCount: number
 }
-export const WorkListContainer: React.FC<Props> = ({
-  count,
-  state,
-  workCount,
-}) => {
+export const WorkListContainer: React.FC<Props> = ({ state, workCount }) => {
+  const displayCount = Number(process.env.WORK_LIST_DISPLAY_COUNT) || 10
   const { data, loading, error, fetchMore } = useGetWorkListQuery({
-    variables: { state: state, first: count, after: null },
+    variables: { state: state, first: displayCount, after: null },
   })
   const {
     workData,
@@ -29,7 +25,7 @@ export const WorkListContainer: React.FC<Props> = ({
     const { data } = await fetchMore({
       variables: { after: cursor },
     })
-    setWorksInfiniteScrollProps(data, dataLength, count)
+    setWorksInfiniteScrollProps(data, dataLength, displayCount)
   }
 
   if (loading || !workData) {

@@ -14,6 +14,9 @@ const moduleExports = {
       },
     ]
   },
+  env: {
+    WORK_LIST_DISPLAY_COUNT: 10,
+  },
 }
 
 const SentryWebpackPluginOptions = {

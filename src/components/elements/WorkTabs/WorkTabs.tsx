@@ -16,10 +16,9 @@ import { getStatusState } from "./utils"
 
 type Props = {
   data: TabData[]
-  displayCount: number
   tabIndex: number
 }
-export const WorkTabs: React.FC<Props> = ({ data, displayCount, tabIndex }) => {
+export const WorkTabs: React.FC<Props> = ({ data, tabIndex }) => {
   return (
     <Center mt={4}>
       <Tabs
@@ -55,7 +54,6 @@ export const WorkTabs: React.FC<Props> = ({ data, displayCount, tabIndex }) => {
           {data.map((d) => (
             <TabPanel key={d.href}>
               <WorkListContainer
-                count={displayCount}
                 state={getStatusState(d.href)}
                 workCount={Number(d.count)}
               />

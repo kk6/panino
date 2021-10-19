@@ -9,7 +9,6 @@ import { WorkTabs } from "./WorkTabs"
 
 export const WorkTabsContainer: React.FC = () => {
   const router = useRouter()
-  const displayCount = 10
   const tabIndex = getTabPaths(router.query.path)
   const { data, loading, error } = useGetWorkTabsCountsQuery()
   if (loading) {
@@ -21,7 +20,5 @@ export const WorkTabsContainer: React.FC = () => {
     return <div>ERROR</div>
   }
   const tabData = mappingTabData(data)
-  return (
-    <WorkTabs data={tabData} tabIndex={tabIndex} displayCount={displayCount} />
-  )
+  return <WorkTabs data={tabData} tabIndex={tabIndex} />
 }
